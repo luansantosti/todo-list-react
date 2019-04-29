@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createGlobalStyle } from 'styled-components'
 
 import Search from './components/Search'
@@ -12,9 +12,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
-  const [listTasks, setListTasks] = useState([]);
+  const initialList = () => JSON.parse(localStorage.getItem('tasks')) || []
+  const [listTasks, setListTasks] = useState(initialList);
 
-  function handleKeyUp(e) {
+  const handleKeyUp = (e) => {
     const keyCode = e.which || e.keyCode
     const ENTER = 13
 
@@ -23,6 +24,8 @@ function App() {
       e.target.value = ''
     }
   }
+
+  useEffect(() => { localStorage.setItem("tasks", JSON.stringify(listTasks)) }, [listTasks])
 
   return (
     <div className="App">
