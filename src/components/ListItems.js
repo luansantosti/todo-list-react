@@ -1,9 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
 
-const ListItems = ({ tasks }) => (
+const Item = styled.li`
+  &.done {
+    text-decoration: line-through;
+  }
+`
+
+const ListItems = ({ tasks, done, remove }) => (
   <ul>
-    {tasks.map( (item, i) => (
-      <li key={i}>{item}</li>
+    {tasks.map( (item) => (
+      <Item key={item.id} className={ item.done && 'done'}>
+        {item.value}  
+        { !item.done && <button onClick={() => done(item.id) }>Ok</button> }
+        { item.done && <button onClick={() => remove(item.id)}>X</button> }
+      </Item>
     ))}
   </ul>
 )
