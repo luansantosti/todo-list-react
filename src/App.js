@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 
+import Title from './components/Title'
 import InputAdd from './components/InputAdd'
 import ListItems from './components/ListItems'
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    background: #D1345B;
+  }
   body {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -44,6 +51,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
+      <Title />
       <InputAdd handleCreate={handleCreate}/>
       <ListItems tasks={listTasks} remove={handleRemove} done={handleDone}/>
     </div>
